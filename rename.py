@@ -9,14 +9,14 @@ class FileRenamer:
     def __init__(self, master):
         self.master = master
         master.title("UTCC File Renamer")
-        # master.geometry("300x270")
+        master.geometry("300x200")
 
         self.directory = ""
         self.files = []
         self.date_type = "created"
         self.add_date_prefix = True
         self.prefix = ""
-       
+
         # Create the UI elements
         self.label = ttk.Label(master, text="Select a directory:")
         self.label.pack()
@@ -61,7 +61,7 @@ class FileRenamer:
         # Create the menu bar
         self.menu_bar = tk.Menu(master)
         self.master.config(menu=self.menu_bar)
-        
+
         self.file_menu = tk.Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label="File", menu=self.file_menu)
         self.file_menu.add_command(label="Quit", command=master.quit)
@@ -70,15 +70,16 @@ class FileRenamer:
         self.menu_bar.add_cascade(label="Edit", menu=self.edit_menu)
         self.edit_menu.add_command(
             label="Remove Prefix", command=self.remove_prefix)
-        self.edit_menu.add_checkbutton(label="Use Modified Date", onvalue="", offvalue="created", variable=self.date_var)
+        self.edit_menu.add_checkbutton(
+            label="Use Modified Date", onvalue="", offvalue="created", variable=self.date_var)
 
         self.about_menu = tk.Menu(self.menu_bar, tearoff=0)
         self.menu_bar.add_cascade(label="About", menu=self.about_menu)
-        self.about_menu.add_command(label="About", command=self.show_about_dialog)
+        self.about_menu.add_command(
+            label="About", command=self.show_about_dialog)
 
     def show_about_dialog(self):
         dialog = AboutDialog(self.master)
-
 
     def toggle_date_prefix(self):
         self.add_date_prefix = self.prefix_checkbox_var.get()
@@ -104,7 +105,7 @@ class FileRenamer:
                           os.path.join(self.directory, new_filename))
         messagebox.showinfo(
             "Success", "Prefix has been removed from all files")
-        
+
         self.clear_files()
 
     def rename_files(self):
@@ -161,6 +162,7 @@ class FileRenamer:
         self.files = []
         self.rename_button.config(state="disabled")
 
+
 class FileDialog:
     def __init__(self, parent, files):
         self.parent = parent
@@ -206,6 +208,7 @@ class FileDialog:
         self.parent.wait_window(self.dialog)
         return self.selected_files
 
+
 class AboutDialog:
     def __init__(self, parent):
         self.parent = parent
@@ -213,8 +216,9 @@ class AboutDialog:
         self.dialog = tk.Toplevel(parent)
         self.dialog.title("About")
 
-        self.label = ttk.Label(self.dialog, text="UTCC File Renamer version 1.0 is created by \n Chatchai Wangwiwattana (MarkDigital) @ UTCC")
-        self.label.pack( padx=5, pady=5)
+        self.label = ttk.Label(
+            self.dialog, text="UTCC File Renamer version 1.0 is created by \n Chatchai Wangwiwattana (MarkDigital) @ UTCC")
+        self.label.pack(padx=5, pady=5)
 
         # Create OK and Cancel buttons
         button_frame = ttk.Frame(self.dialog)
@@ -222,7 +226,6 @@ class AboutDialog:
 
         ok_button = ttk.Button(button_frame, text="OK", command=self.ok)
         ok_button.pack(side=tk.LEFT)
-
 
     def ok(self):
         self.dialog.destroy()
