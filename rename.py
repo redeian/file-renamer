@@ -1,8 +1,7 @@
 import os
 import datetime
 import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
-from ttkthemes import ThemedTk
+from tkinter import filedialog, messagebox
 
 
 class FileRenamer:
@@ -18,43 +17,43 @@ class FileRenamer:
         self.prefix = ""
 
         # Create the UI elements
-        self.label = ttk.Label(master, text="Select a directory:")
+        self.label = tk.Label(master, text="Select a directory:")
         self.label.pack()
 
-        self.browse_button = ttk.Button(
+        self.browse_button = tk.Button(
             master, text="Browse", command=self.browse_directory)
         self.browse_button.pack()
 
         self.prefix_checkbox_var = tk.BooleanVar(value=True)
-        self.prefix_checkbox = ttk.Checkbutton(
+        self.prefix_checkbox = tk.Checkbutton(
             master, text="Use Date", variable=self.prefix_checkbox_var, command=self.toggle_date_prefix)
         self.prefix_checkbox.pack()
 
-        # self.date_label = ttk.Label(master, text="Select date type:")
+        # self.date_label = tk.Label(master, text="Select date type:")
         # self.date_label.pack()
 
         self.date_var = tk.StringVar(value=self.date_type)
-        # self.created_radio = ttk.Radiobutton(
+        # self.created_radio = tk.Radiobutton(
         #     master, text="Created Date", variable=self.date_var, value="created")
         # self.created_radio.pack()
 
-        # self.modified_radio = ttk.Radiobutton(
+        # self.modified_radio = tk.Radiobutton(
         #     master, text="Modified Date", variable=self.date_var, value="modified")
         # self.modified_radio.pack()
 
-        self.prefix_label = ttk.Label(
+        self.prefix_label = tk.Label(
             master, text="Enter a prefix (optional):")
         self.prefix_label.pack()
 
-        self.prefix_entry = ttk.Entry(master, state="disabled")
+        self.prefix_entry = tk.Entry(master, state="disabled")
         self.prefix_entry.pack()
 
         # self.remove_prefix_var = tk.BooleanVar(value=True)
-        # self.remove_prefix_checkbox = ttk.Checkbutton(
+        # self.remove_prefix_checkbox = tk.Checkbutton(
         #     master, text="Remove existing prefix", variable=self.remove_prefix_var)
         # self.remove_prefix_checkbox.pack()
 
-        self.rename_button = ttk.Button(
+        self.rename_button = tk.Button(
             master, text="Rename Files", command=self.rename_files, state="disabled")
         self.rename_button.pack()
 
@@ -180,13 +179,13 @@ class FileDialog:
         self.listbox.select_set(0, tk.END)
 
         # Create OK and Cancel buttons
-        button_frame = ttk.Frame(self.dialog)
+        button_frame = tk.Frame(self.dialog)
         button_frame.pack(side=tk.BOTTOM, padx=5, pady=5)
 
-        ok_button = ttk.Button(button_frame, text="OK", command=self.ok)
+        ok_button = tk.Button(button_frame, text="OK", command=self.ok)
         ok_button.pack(side=tk.LEFT)
 
-        cancel_button = ttk.Button(
+        cancel_button = tk.Button(
             button_frame, text="Cancel", command=self.cancel)
         cancel_button.pack(side=tk.LEFT)
 
@@ -216,22 +215,21 @@ class AboutDialog:
         self.dialog = tk.Toplevel(parent)
         self.dialog.title("About")
 
-        self.label = ttk.Label(
+        self.label = tk.Label(
             self.dialog, text="UTCC File Renamer version 1.0 is created by \n Chatchai Wangwiwattana (MarkDigital) @ UTCC")
         self.label.pack(padx=5, pady=5)
 
         # Create OK and Cancel buttons
-        button_frame = ttk.Frame(self.dialog)
+        button_frame = tk.Frame(self.dialog)
         button_frame.pack(side=tk.BOTTOM, padx=5, pady=5)
 
-        ok_button = ttk.Button(button_frame, text="OK", command=self.ok)
+        ok_button = tk.Button(button_frame, text="OK", command=self.ok)
         ok_button.pack(side=tk.LEFT)
 
     def ok(self):
         self.dialog.destroy()
 
 
-# root = tk.Tk()
-root = ThemedTk(theme='breeze')
+root = tk.Tk()
 renamer = FileRenamer(root)
 root.mainloop()
